@@ -6,6 +6,10 @@
 {
     background-color: #F8F8F8;
 }
+.row-gap
+{
+    row-gap: 50px;
+}
 .input-style
 {
     background-color: #DCDCDC;
@@ -16,4 +20,14 @@
 .form-center {
   display:flex;
   justify-content: center;
+}
+.notify {
+    color: #fff;
+    text-align: center;
+    margin: 0 auto;
+    background: #222436;
+    margin-top: 10px;
+    border-radius: 15px;
+    padding: 5px 20px;
+    display: none;
 }
