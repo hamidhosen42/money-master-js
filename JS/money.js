@@ -1,6 +1,6 @@
-function updateTotalInput(id)
+function updateTotalInput(inputId)
 {
-    const input = document.getElementById(id);
+    const input = document.getElementById(inputId);
     const inputAmountText = input.value;
     const inputAmount = parseInt(inputAmountText);
 
@@ -9,33 +9,27 @@ function updateTotalInput(id)
     return inputAmount;
 }
 
-function updateTotalAmount(id)
+function updateTotalAmount(updateId,amount)
 {
-    const update = document.getAnimations("total-expenses");
+    const update = document.getElementById(updateId);
     const updateText=update.innerText;
-    const updateAmount=parent(updateText);
+    const updateAmount=parseInt(updateText);
+    
+    update.innerText=amount;
 }
 
 
 function Calculate()
 {
     const incomeAmount = updateTotalInput("income-Input");
+
     const foodAmount = updateTotalInput("food-input");
+    const rentAmount=updateTotalInput("rent-input");
+    const clothesAmount = updateTotalInput("clothes-input");
 
-    // const foodAmount = updateTotalInput("food-input");
-    // const rentAmount = updateTotalInput("rent-onput");
-    // const clothesAmount = updateTotalInput("clothes-input");
+    const totalExpensesAmount = foodAmount + rentAmount + clothesAmount;
+    const totalBalanceRemaining=incomeAmount-totalExpensesAmount;
 
-    
-
-    // console.log(incomeAmount);
-
-    // const totalBalanceInput = document.getElementById("total-balncece");
-    // const totalBalanceText=totalBalanceInput.innerText;
-    // const totalAmount=parseInt(totalBalanceText);
-
-    const totalExpenses = updateTotalAmount("total-expenses");
-    
-
-    totalBalanceInput.innerText=incomeAmount;
+    updateTotalAmount("total-balance",totalBalanceRemaining);
+    updateTotalAmount("total-expenses",totalExpensesAmount);
 }
