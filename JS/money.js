@@ -1,4 +1,5 @@
-function updateTotalInput(inputId) {
+// -------------all input section----------------
+function updateTotalInput(inputId, isAdd) {
   const input = document.getElementById(inputId);
   const inputAmountText = input.value;
   const inputAmount = parseInt(inputAmountText);
@@ -6,45 +7,42 @@ function updateTotalInput(inputId) {
   const stringError = document.getElementById("string-error");
   const negativeError = document.getElementById("negative-error");
 
-  if (isNaN(inputAmountText) || document.getElementById(inputId).value == "") {
+  if (
+    (isNaN(inputAmountText) || document.getElementById(inputId).value == "") &&
+    isAdd == false
+  ) {
     stringError.style.display = "block";
     negativeError.style.display = "none";
 
     input.value = "";
     return false;
-  } else if (inputAmount < 0) {
+  } else if (inputAmount < 0 && isAdd == false) {
     stringError.style.display = "none";
     negativeError.style.display = "block";
     input.value = "";
 
     return false;
   } else {
-    input.value = "";
     return inputAmount;
   }
 }
 
-function updateTotalAmount(updateId, amount, isbool) {
+// ------------all update section id------------
+function updateTotalAmount(updateId, amount) {
   const update = document.getElementById(updateId);
-  const updateText = update.innerText;
+  //   const updateText = update.innerText;
+  //   const updateAmount = parseInt(updateText);
 
-  const updateAmount = parseInt(updateText);
-
-  if (isbool) {
-    const incomeAmount = updateTotalInput("income-Input");
-    const totalSave = parseFloat((amount * incomeAmount) / 100);
-    update.innerText = totalSave;
-  } else {
-    update.innerText = amount;
-  }
+  update.innerText = amount;
 }
 
+// -------calculation section----------
 function Calculate() {
-  const incomeAmount = updateTotalInput("income-Input");
+  const incomeAmount = updateTotalInput("income-Input", false);
 
-  const foodAmount = updateTotalInput("food-input");
-  const rentAmount = updateTotalInput("rent-input");
-  const clothesAmount = updateTotalInput("clothes-input");
+  const foodAmount = updateTotalInput("food-input", false);
+  const rentAmount = updateTotalInput("rent-input", false);
+  const clothesAmount = updateTotalInput("clothes-input", false);
 
   if (
     incomeAmount == false ||
@@ -56,21 +54,41 @@ function Calculate() {
     const totalExpensesAmount = foodAmount + rentAmount + clothesAmount;
     const totalBalanceRemaining = incomeAmount - totalExpensesAmount;
 
-    updateTotalAmount("total-balance", totalBalanceRemaining, false);
-    updateTotalAmount("total-expenses", totalExpensesAmount, false);
+    updateTotalAmount("total-balance", totalBalanceRemaining);
+    updateTotalAmount("total-expenses", totalExpensesAmount);
   }
 }
 
+function renameBalance(textId) {
+  const updateBal = document.getElementById(textId);
+  const updateBalText = updateBal.innerText;
+  const updateBalAmount = parseFloat(updateBalText);
+
+  return updateBalAmount;
+}
+
+// -------saving amount section---------------
 function save() {
-  const saveInputAmount = updateTotalInput("save-input");
+  const saveInput = document.getElementById("save-input");
+  const saveInputText = saveInput.value;
+  const saveAmount = parseInt(saveInputText);
 
-  updateTotalAmount("save-amount", saveInputAmount, true);
-}
+  console.log(saveAmount);
 
-function checkInp() {
-  var x = document.forms["myForm"]["age"].value;
-  if (isNaN(x)) {
-    alert("Must input numbers");
-    return false;
+  if (
+    isNaN(saveInputText) ||
+    document.getElementById("save-input").value == ""
+  ) {
+  } else {
+    const amount = updateTotalInput("income-Input", true);
+
+    const toalsaveAmount = (saveAmount * amount) / 100;
+    document.getElementById("save-amount").innerText = toalsaveAmount;
+
+    const totalBalance = renameBalance("total-balance");
+    const updatedrenameBalance = totalBalance - toalsaveAmount;
+    document.getElementById("remain-balance").innerText = updatedrenameBalance;
   }
+
+  //   const saveBalance = renameBalance("save-amount");
 }

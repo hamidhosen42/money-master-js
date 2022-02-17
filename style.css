@@ -1,7 +1,9 @@
+/* -------header section--- */
 .header-color
 {
     color: #31A5AC;
 }
+/* ------------container section---------- */
 .container-color
 {
     background-color: #F8F8F8;
@@ -10,6 +12,7 @@
 {
     row-gap: 50px;
 }
+/* ----------input style--------- */
 .input-style
 {
     background-color: #DCDCDC;
@@ -21,6 +24,7 @@
   display:flex;
   justify-content: center;
 }
+/* ----------error section---------------- */
 .notify {
     color: #fff;
     text-align: center;
